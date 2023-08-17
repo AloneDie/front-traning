@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symbol</title>
+  </head>
+  <body>
+    <script>
+      // symbol 每个值都是唯一的
+      // 使用 symbol.for 创建共享符号
+      // 知名符号， 迭代器 Symbol.iterator ...
+
+      // 实现symbol.for
+      const mySymbolFor = (() => {
+        const global = {};
+        return (name) => {
+          if (!global[name]) {
+            global[name] = Symbol(name);
+          }
+          return global[name];
+        };
+      })();
+
+      const symbol1 = mySymbolFor("ddd");
+      const symbol2 = mySymbolFor("ddd");
+      const symbol3 = mySymbolFor();
+
+      console.log("[debug] ", symbol1 === symbol2, symbol3 === symbol2);
+    </script>
+  </body>
+</html>
